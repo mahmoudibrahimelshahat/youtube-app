@@ -1,0 +1,82 @@
+<div class="back">
+  <i routerLink="/home" class="pi pi-chevron-circle-left"></i>
+</div>
+<div class="video-details" *ngFor="let item of videoDetails?.items">
+  <div class="thumbnails">
+    <img
+      onerror="this.onerror=null;this.src='assets/imgs/placeholder.png'"
+      [src]="item?.snippet?.thumbnails?.maxres?.url"
+      width="100%"
+      [height]="item?.snippet?.thumbnails?.maxres?.height"
+      alt=""
+    />
+  </div>
+
+  <div class="title">
+    <h2>{{ item?.snippet?.title }}</h2>
+    <button
+      class="p-button-danger"
+      [disabled]="isAddedToFavList"
+      (click)="addToFavoriteList()"
+    >
+      Add to favorite
+    </button>
+  </div>
+
+  <div class="rate-view">
+    <div class="rate">
+      <h6>Rate Now</h6>
+      <p-rating
+        [(ngModel)]="rateValue"
+        (click)="onSelectRate()"
+        [cancel]="false"
+      ></p-rating>
+    </div>
+    <div class="date">
+      <h6>Duration</h6>
+      <p>
+        {{ item?.snippet?.publishedAt | date : "HH:mm:ss" }}
+      </p>
+    </div>
+    <div class="viewers">
+      <div class="likes">
+        <fa-icon [icon]="faThumbsUp"></fa-icon>
+        <p>{{ item?.snippet?.like || 0 }}</p>
+      </div>
+      <div class="watchs">
+        <i class="pi pi-eye"></i>
+        <p>{{ item?.snippet?.watch || 0 }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="description">
+    <h4>
+      published on {{ item?.snippet?.publishedAt | date }}
+    </h4>
+    <p>{{ item?.snippet?.description }}</p>
+  </div>
+</div>
+
+<hr />
+
+<div class="fav-rate">
+  <div class="favorite-list">
+    <h3>Your Favorite List</h3>
+    <ul *ngFor="let item of favoriteList; let i = index">
+      <li>{{ i + 1 }} - {{ item?.item?.snippet?.title }}</li>
+    </ul>
+    <ng-container *ngIf="!favoriteList"> no Favorite List </ng-container>
+  </div>
+
+  <div class="rate-list">
+    <h3>Your rating List</h3>
+    <ul *ngFor="let rate of ratingList; let i = index">
+      <li>{{ i + 1 }} - {{ rate?.item?.snippet?.title }} &#8594; {{ rate?.rate}}  &#9733;    </li>
+    </ul>
+    <ng-container *ngIf="!ratingList"> no rating List </ng-container>
+  </div>
+</div>
+
+
+<p-toast position="top-left"></p-toast>

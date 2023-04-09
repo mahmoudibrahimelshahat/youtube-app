@@ -1,0 +1,9 @@
+<div class="navbar">
+    <div class="logo">
+    <img src="assets/imgs/inmobly.png" alt="">
+    </div>
+    <div class="search-input" *ngIf="hasSearch">
+        <input class="form-control" [formControl]="searchInputProcess" type="text" placeholder="Search by video title">
+        <i class="pi pi-search"></i>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+
+
+<div class="table">
+    <div class="search-input">
+        <input class="form-control" [formControl]="searchInputProcess" type="text" placeholder="Search by video title">
+        <i class="pi pi-search"></i>
+    </div>
+
+
+<p-table responsiveLayout="scroll"  *ngIf="videos && videos.items"
+            [lazy]="true"  (onSort)="onSort($event)" [customSort]="true" [value]="videos.items" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+            <th pSortableColumn="date">Publish Date <p-sortIcon field="date"></p-sortIcon></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-video>
+        <tr>
+            <td>
+                <img onerror="this.onerror=null;this.src='assets/imgs/placeholder.png'" [src]="video?.snippet?.thumbnails?.medium?.url" alt="">
+            </td>
+       
+            <td>{{ video?.snippet?.title }}</td>
+       
+            <td>{{ video?.snippet?.publishedAt | date: 'dd-MM-yyyy'}}</td>
+      
+            <td>
+                <button class="btn " (click)="navigateToDetails(video?.id?.videoId)"> Details </button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+
+    <div *ngIf="videos?.items?.length ==0" class="informative-block">
+        <div class="title text-center h-100">
+            <img src="assets/imgs/nodata.png" alt="">
+            <h3 class="heading heading--tertiary fs-2 color-gray mb-2 flex justify-content-center"> No data </h3>
+        </div>
+
+        <ng-content></ng-content>
+    </div>
+
+<div class="pagination" *ngIf="videos?.items?.length !==0">
+    <i *ngIf="hasPrevToken" (click)="onPagePrevious()" class="pi pi-arrow-left"></i>
+
+    <i (click)="onPageNext()" class="pi pi-arrow-right"></i> <br>
+</div>
+
+
+
+<p-toast position="top-left"></p-toast>
