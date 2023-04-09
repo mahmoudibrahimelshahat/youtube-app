@@ -9,7 +9,7 @@ after we get videos we can go to see details of this video and we can add to fav
 from local storage we can get items that exist like favorite list or rating list and we can show them in video details
 
 for first bouns unfortunalty maybe i will search for it but i think this will take me  long time 
-for second bouns i make gulp.js and write some code to minify file (js) that exist on app and to increase preformance 
+for second bouns i make gulp.js and write some code to minify file (js) that exist on app and to increase preformance run (gulp minify) on terminal to make file on dist
 for third bouns  i make input like search to put channel id and every change you can see videos of this channel
 
 Note >> key that used to get every call api is static and this key have limit quotes like 100mb i don't know for real but when this error show 403 
